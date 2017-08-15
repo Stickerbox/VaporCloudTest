@@ -3,7 +3,15 @@ import Vapor
 
 extension Droplet {
     func setupRoutes() throws {
+        
+        post("test") { request in
+            return "hey"
+        }
 
+        get("lol") { request in
+            return "heyyy"
+        }
+        
         try resource("posts", PostController.self)
     }
 }
@@ -11,7 +19,7 @@ extension Droplet {
 public extension Droplet {
     
     func listen(at endpoint: String, completion: @escaping (AlexaRequest) -> (AlexaResponse)) {
-        
+
         post(endpoint) { request in
             guard let json = request.json else { return self.failureResponse }
             

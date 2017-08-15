@@ -1,10 +1,3 @@
-//
-//  Constants.swift
-//  AlexaSkillExample
-//
-//  Created by Jordan.Dixon on 14/08/2017.
-//
-
 import Vapor
 import Foundation
 

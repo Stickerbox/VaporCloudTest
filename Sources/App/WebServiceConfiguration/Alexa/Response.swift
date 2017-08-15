@@ -1,10 +1,3 @@
-//
-//  Response.swift
-//  AlexaSkillExample
-//
-//  Created by Jordan.Dixon on 14/08/2017.
-//
-
 import Vapor
 import Foundation
 
@@ -56,13 +49,13 @@ enum AlexaSpeech: NodeConvertible {
    is thus represented by a separate object.
 */
  
-protocol AlexaCardable: NodeConvertible {}
+protocol AlexaVisualisable: NodeConvertible {}
 
 /*
    A card that allows the user to link their Alexa account to the skill.
 */
 
-struct AlexaLinkAccountCard: AlexaCardable {
+struct AlexaLinkAccountCard: AlexaVisualisable {
     
     var node: Node {
         return ["type": "LinkAccount"]
@@ -73,7 +66,7 @@ struct AlexaLinkAccountCard: AlexaCardable {
    A card with a simple title / text output.
 */
 
-struct AlexaSimpleCard: AlexaCardable {
+struct AlexaSimpleCard: AlexaVisualisable {
     
     var title: String
     var content: String
@@ -93,7 +86,7 @@ struct AlexaSimpleCard: AlexaCardable {
    small screen interfaces. Images are passed as URLs.
 */
 
-struct AlexaStandardCard: AlexaCardable {
+struct AlexaStandardCard: AlexaVisualisable {
     var title: String
     var text: String
     var largeImageURL: String?
@@ -136,12 +129,12 @@ public struct AlexaResponse: NodeConvertible {
     
     var speech: AlexaSpeech?
     var reprompt: AlexaSpeech?
-    var card: AlexaCardable?
+    var card: AlexaVisualisable?
     var attributes: Node?
     var endSession: Bool
     var directives: [AlexaDirective]?
     
-    init(text: String, card: AlexaCardable? = nil, attributes: Node? = nil, endSession: Bool = true) {
+    init(text: String, card: AlexaVisualisable? = nil, attributes: Node? = nil, endSession: Bool = true) {
         self.speech = AlexaSpeech.plainText(text)
         self.reprompt = nil
         self.card = card
@@ -149,7 +142,7 @@ public struct AlexaResponse: NodeConvertible {
         self.endSession = endSession
     }
     
-    init(ssml: String, card: AlexaCardable? = nil, attributes: Node? = nil, endSession: Bool = true) {
+    init(ssml: String, card: AlexaVisualisable? = nil, attributes: Node? = nil, endSession: Bool = true) {
         self.speech = AlexaSpeech.ssml(ssml)
         self.reprompt = nil
         self.card = card
