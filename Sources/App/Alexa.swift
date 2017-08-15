@@ -21,6 +21,8 @@ extension Droplet {
          an AlexaRequest object and you must return an AlexaResponse
          */
         
+        get("test") { _ in return "test received" }
+        
         listen(at: "EXAMPLE-ENDPOINT") { request in
             
             /*
